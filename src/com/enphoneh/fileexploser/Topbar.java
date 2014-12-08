@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class Topbar extends RelativeLayout {
 
+	static private int LEFT_BUTTON_ID = 101;
+	static private int RIGHT_BUTTON_ID = 102;
+	
 	private Button leftButton , rightButton;
     private TextView tvTitle;
 
@@ -27,6 +31,17 @@ public class Topbar extends RelativeLayout {
 	
     private LayoutParams leftParams,rightParams,titleParams;
     
+    private topbarClickListener listener;
+    
+    public interface topbarClickListener{
+    	public void leftButtonClick();
+    	public void rightButtonClick();
+    }
+    
+    public void setOnTopbarClickListener(topbarClickListener listener){
+    	this.listener = listener;
+    }
+    
 	public Topbar(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Topbar);
@@ -39,7 +54,7 @@ public class Topbar extends RelativeLayout {
 		rightBackground = ta.getDrawable(R.styleable.Topbar_rightBackground);
 		
 		title = ta.getString(R.styleable.Topbar_titleText);
-		titleTextSize = ta.getInt(R.styleable.Topbar_titleTextSize, 0);
+		titleTextSize = ta.getFloat(R.styleable.Topbar_titleTextSize, 0);
 		titleTextColor = ta.getColor(R.styleable.Topbar_titleTextColor, 0);
 		
 		ta.recycle();
@@ -48,10 +63,12 @@ public class Topbar extends RelativeLayout {
 		rightButton = new Button(context);
 		tvTitle = new TextView(context);
 		
+		leftButton.setId(LEFT_BUTTON_ID);
 		leftButton.setText(leftText);
 		leftButton.setTextColor(leftTextColor);
 		leftButton.setBackground(leftBackground);
 		
+		rightButton.setId(RIGHT_BUTTON_ID);
 		rightButton.setText(rightText);
 		rightButton.setTextColor(rightTextColor);
 		rightButton.setBackground(rightBackground);
@@ -71,10 +88,24 @@ public class Topbar extends RelativeLayout {
 		addView(rightButton, rightParams);
 		
 		titleParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		titleParams.addRule(RelativeLayout.CENTER_IN_PARENT,TRUE);
+		titleParams.addRule(RelativeLayout.RIGHT_OF,LEFT_BUTTON_ID);
+		titleParams.addRule(RelativeLayout.CENTER_VERTICAL,TRUE);
 		addView(tvTitle, titleParams);
+		
+		leftButton.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View v) {
+				listener.leftButtonClick();				
+			}
+		});
+		
+		rightButton.setOnClickListener(new OnClickListener() {		
+			@Override
+			public void onClick(View v) {
+				listener.rightButtonClick();			
+			}
+		});
+		
+		rightButton.setVisibility(GONE);
 	}
-
-
-
 }
