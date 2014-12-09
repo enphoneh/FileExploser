@@ -106,6 +106,6 @@ public class Topbar extends RelativeLayout {
 			}
 		});
 		
-//		rightButton.setVisibility(GONE);
+		rightButton.setVisibility(GONE);
 	}
 }
