@@ -2,8 +2,10 @@ package com.enphoneh.fileexploser;
 
 import com.enphoneh.fileexploser.Topbar.topbarClickListener;
 
+import fileexploser.keyevent.controller.KeyEventController;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -20,15 +22,15 @@ public class MainActivity extends Activity {
 			@Override
 			public void rightButtonClick() {
 				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "leftButtonClick", Toast.LENGTH_SHORT).show();
+				
 			}
 			
 			@Override
-			public void leftButtonClick() {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), "rightButtonClick", Toast.LENGTH_SHORT).show();
+			public void leftButtonClick() {				
+				MainActivity.this.onBackPressed();
 			}
 		});
 	}
-
+	
+	
 }
