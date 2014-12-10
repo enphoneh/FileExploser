@@ -2,12 +2,14 @@ package com.enphoneh.fileexploser;
 
 import com.enphoneh.fileexploser.Topbar.topbarClickListener;
 
+import fileexplorer.datamanager.GlobelVeluesManager;
 import fileexploser.keyevent.controller.KeyEventController;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -17,12 +19,13 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		Topbar topbar =  (Topbar)findViewById(R.id.Topbar);
+		TextView tvTitle = (TextView) topbar.getChildAt(GlobelVeluesManager.TITLEBAR_CENTERTITLE_INDEX);
+		tvTitle.setText("文件管理器");
 		topbar.setOnTopbarClickListener(new topbarClickListener() {
 			
 			@Override
 			public void rightButtonClick() {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 			
 			@Override
