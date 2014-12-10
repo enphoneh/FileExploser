@@ -1,5 +1,6 @@
 package com.enphoneh.fileexploser;
 
+import fileexplorer.datamanager.GlobelVeluesManager;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -81,16 +82,16 @@ public class Topbar extends RelativeLayout {
 		
 		leftParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT,TRUE);
-		addView(leftButton, leftParams);
+		addView(leftButton,GlobelVeluesManager.TITLEBAR_LEFTBUTTON_INDEX, leftParams);
 		
 		rightParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		rightParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,TRUE);
-		addView(rightButton, rightParams);
+		addView(rightButton,GlobelVeluesManager.TITLEBAR_RIGHTBUTTON_INDEX, rightParams);
 		
 		titleParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		titleParams.addRule(RelativeLayout.RIGHT_OF,LEFT_BUTTON_ID);
 		titleParams.addRule(RelativeLayout.CENTER_VERTICAL,TRUE);
-		addView(tvTitle, titleParams);
+		addView(tvTitle,GlobelVeluesManager.TITLEBAR_CENTERTITLE_INDEX, titleParams);
 		
 		leftButton.setOnClickListener(new OnClickListener() {		
 			@Override
@@ -108,4 +109,6 @@ public class Topbar extends RelativeLayout {
 		
 		rightButton.setVisibility(GONE);
 	}
+	
+	
 }
