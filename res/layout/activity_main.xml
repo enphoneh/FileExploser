@@ -19,5 +19,11 @@
         app:titleTextSize="20"
         app:titleTextColor="#FF0000"
         ></com.enphoneh.fileexploser.Topbar>
-
+    
+	<include layout="@layout/layout_content"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_below="@id/Topbar"/>
+	
+	
 </RelativeLayout>
