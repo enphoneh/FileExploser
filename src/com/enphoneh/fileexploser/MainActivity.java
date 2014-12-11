@@ -66,9 +66,9 @@ public class MainActivity extends Activity {
 		parentMap.put("name", "..");
 		parentMap.put("img", R.drawable.parent);
 		parentMap.put("path", "go to parent directory");
-		list.add(parentMap);
-		Map<String, Object> directoryMap = new HashMap<String, Object>();
+		list.add(parentMap);		
 		for (File file : files){
+			Map<String, Object> directoryMap = new HashMap<String, Object>();
 			if(file.isDirectory()){
 				directoryMap.put("img", R.drawable.diretory);
 			}else{
