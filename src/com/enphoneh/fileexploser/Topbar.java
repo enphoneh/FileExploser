@@ -82,7 +82,7 @@ public class Topbar extends RelativeLayout {
 		
 		setBackgroundColor(0xFF454545);
 		
-		leftParams = new LayoutParams(100, LayoutParams.WRAP_CONTENT);
+		leftParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT,TRUE);
 		leftParams.setMargins(0, 0, 0, 0);
 		addView(leftButton,GlobelVeluesManager.TITLEBAR_LEFTBUTTON_INDEX, leftParams);
