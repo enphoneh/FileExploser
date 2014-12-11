@@ -66,8 +66,10 @@ public class Topbar extends RelativeLayout {
 		
 		leftButton.setId(LEFT_BUTTON_ID);
 		leftButton.setText(leftText);
+		leftButton.setTextSize(15);
 		leftButton.setTextColor(leftTextColor);
 		leftButton.setBackground(leftBackground);
+		leftButton.setPadding(0, 0, 0, 0);
 		
 		rightButton.setId(RIGHT_BUTTON_ID);
 		rightButton.setText(rightText);
@@ -80,17 +82,20 @@ public class Topbar extends RelativeLayout {
 		
 		setBackgroundColor(0xFF454545);
 		
-		leftParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		leftParams = new LayoutParams(100, LayoutParams.WRAP_CONTENT);
 		leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT,TRUE);
+		leftParams.setMargins(0, 0, 0, 0);
 		addView(leftButton,GlobelVeluesManager.TITLEBAR_LEFTBUTTON_INDEX, leftParams);
 		
 		rightParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		rightParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT,TRUE);
+		rightParams.setMargins(0, 0, 0, 0);
 		addView(rightButton,GlobelVeluesManager.TITLEBAR_RIGHTBUTTON_INDEX, rightParams);
 		
 		titleParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		titleParams.addRule(RelativeLayout.RIGHT_OF,LEFT_BUTTON_ID);
 		titleParams.addRule(RelativeLayout.CENTER_VERTICAL,TRUE);
+		titleParams.setMargins(10, 0, 0, 0);
 		addView(tvTitle,GlobelVeluesManager.TITLEBAR_CENTERTITLE_INDEX, titleParams);
 		
 		leftButton.setOnClickListener(new OnClickListener() {		
