@@ -16,15 +16,20 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnItemClickListener {
 
 	private TextView tvTitle;
 	private ListView lvFiletree;
+	private String path;
+	private List<Map<String, Object>> list;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,7 +38,8 @@ public class MainActivity extends Activity {
 		tvTitle = (TextView) topbar.getChildAt(GlobelVeluesManager.TITLEBAR_CENTERTITLE_INDEX);
 		lvFiletree = (ListView)findViewById(R.id.content_listview);
 		tvTitle.setText("文件管理器");
-		refreshListItem("/");
+		path = "/";
+		refreshListItem(path);
 		topbar.setOnTopbarClickListener(new topbarClickListener() {
 			
 			@Override
@@ -49,13 +55,14 @@ public class MainActivity extends Activity {
 	}
 	
 	private void refreshListItem(String path){
+		this.path = path;
 		tvTitle.setText("文件管理器 > " + path);
-		List<Map<String, Object>> list;
-		list = buildListForSimpleAdapter(path);
+		this.list = buildListForSimpleAdapter(path);
 		String Keys []= new String [] {"name","path","img"};
 		int IDs [] = new int [] {R.id.item_name,R.id.item_path,R.id.item_image};
-		SimpleAdapter notes = new SimpleAdapter(this, list, R.layout.listitem, Keys, IDs);
+		SimpleAdapter notes = new SimpleAdapter(this, this.list, R.layout.listitem, Keys, IDs);
 		lvFiletree.setAdapter(notes);
+		lvFiletree.setOnItemClickListener(this);
 		lvFiletree.setSelection(0);
 	}
 	
@@ -81,5 +88,34 @@ public class MainActivity extends Activity {
 		}
 		return list;
 	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		if(position == 0){
+			goToParent(this.path);
+		}else{
+			path = (String) this.list.get(position).get("path");
+			File file = new File(path);
+			if(file.isDirectory()){
+				refreshListItem(path);
+			}else{
+//				文件的处理
+			}
+		}
+		
+	}
+	
+	private void goToParent(String path){
+		File file = new File(path);
+		File str_pa = file.getParentFile();
+		if(str_pa == null){
+			refreshListItem(path);
+		}else{
+			path = str_pa.getAbsolutePath();
+			refreshListItem(path);
+		}
+	}
+	
 	
 }
