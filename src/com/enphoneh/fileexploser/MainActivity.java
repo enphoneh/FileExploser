@@ -68,6 +68,15 @@ public class MainActivity extends Activity implements OnItemClickListener {
 	
 	private List<Map<String, Object>> buildListForSimpleAdapter(String path){
 		File [] files = new File(path).listFiles();
+		if(files == null){
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(0);
+			Map<String, Object> parentMap = new HashMap<String, Object>();
+			parentMap.put("name", "..");
+			parentMap.put("img", R.drawable.parent);
+			parentMap.put("path", "go to parent directory");
+			list.add(parentMap);	
+			return list;
+		}
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(files.length);
 		Map<String, Object> parentMap = new HashMap<String, Object>();
 		parentMap.put("name", "..");
